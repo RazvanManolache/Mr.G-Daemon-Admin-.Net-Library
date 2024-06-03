@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MrG.Daemon.Admin/.vs/
+/MrG.Daemon.Admin/bin/
+/MrG.Daemon.Admin/obj/
