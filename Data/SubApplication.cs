@@ -255,6 +255,16 @@ namespace MrG.Daemon.Control.Data
             }
         }
 
+        private string setupCommand = "";
+        public string SetupCommand
+        {
+            get { return setupCommand; }
+            set
+            {
+                Set(ref setupCommand, value);
+            }
+        }
+
         private bool firstRun;
         public bool FirstRun
         {
