@@ -30,6 +30,7 @@ namespace MrG.Daemon.Control.Managers
         public event EventHandler<List<DiskInfo>?>? DiskInfoEvent;
         public event EventHandler<ApplicationFlagsData?>? FlagsEvent;
         public event EventHandler<List<SubApplication>?>? SubApplicationsEvent;
+        public event EventHandler<List<SubApplication>?>? KitsEvent;
         public event EventHandler<ConfigData?>? ConfigEvent;
         public event EventHandler<List<SubAppStatus>?>? StatusesEvent;
         public event EventHandler<LogEvent?>? LogEvent;
@@ -74,6 +75,10 @@ namespace MrG.Daemon.Control.Managers
                 case "flags":
                     var flags = JsonConvert.DeserializeObject<ResponseFlags>(message);
                     FlagsEvent?.Invoke(this, flags?.Data);
+                    break;
+                case "kits":
+                    var kits = JsonConvert.DeserializeObject<ResponseSubApplications>(message);
+                    KitsEvent?.Invoke(this, kits?.Data);
                     break;
                 case "subapplications":
                     var subapplications = JsonConvert.DeserializeObject<ResponseSubApplications>(message);
