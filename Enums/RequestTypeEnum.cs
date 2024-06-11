@@ -40,9 +40,10 @@ namespace MrG.Daemon.Control.Enums
         //list all subapps
         AppList,
         //get overall status
-        Status
-
-        
-
+        Status,
+        //get kits
+        Kits,
+        // add app
+        AppAdd,
     }
 }

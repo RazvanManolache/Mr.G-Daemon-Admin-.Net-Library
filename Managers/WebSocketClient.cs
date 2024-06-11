@@ -47,16 +47,24 @@ namespace MrG.Daemon.Control.Managers
             _cancellationTokenSource.Cancel();
             if (_webSocket != null)
             {
-                await _webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Client shutting down", CancellationToken.None);
+                try
+                {
+                    await _webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Client shutting down", CancellationToken.None);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error closing connection: {ex.Message}");
+                }
+                
                 _webSocket.Dispose();
             }
         }
 
-        private async Task ConnectAsync()
+        public async Task ConnectAsync()
         {
-            _webSocket = new ClientWebSocket();
+            _webSocket = new ClientWebSocket();            
             await _webSocket.ConnectAsync(_uri, CancellationToken.None);
-            Connected?.Invoke();
+            Connected?.Invoke();            
         }
 
         private async Task ReceiveMessagesAsync()

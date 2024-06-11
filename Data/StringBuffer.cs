@@ -31,6 +31,14 @@ namespace MrG.Daemon.Control.Data
             _currentSizeInBytes = 0;
         }
 
+        public void Clear()
+        {
+            _builder.Clear();
+            _currentSizeInBytes = 0;
+            OnPropertyChanged(nameof(CurrentContent));
+            OnPropertyChanged(nameof(LengthInBytes));
+        }
+
         public void Append(string value)
         {
             if (string.IsNullOrEmpty(value))

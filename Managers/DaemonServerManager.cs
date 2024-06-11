@@ -20,7 +20,7 @@ namespace MrG.Daemon.Control.Managers
         WebSocketClient SocketClient;
         public bool Started { get; private set; }
         private string ServiceName = "MrG.Daemon";
-        public string Port { get; private set; }
+        public string Port { get; private set; } = "8180";
 
         public string IP { get; private set; }
         public bool IsConnected { get; private set; }
