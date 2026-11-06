@@ -1,4 +1,4 @@
-﻿using MrG.Daemon.Control.Communication;
+using MrG.Daemon.Control.Communication;
 using MrG.Daemon.Control.Data;
 using MrG.Daemon.Control.Enums;
 using MrG.Daemon.Control.Events;
@@ -59,14 +59,16 @@ namespace MrG.Daemon.Control.Managers
 
      
 
-        private void SocketClient_MessageReceived(string message)
+        internal void SocketClient_MessageReceived(string message)
         {
             //decode from base64
           //  var messageText = Encoding.UTF8.GetString(Convert.FromBase64String(message));
 
             var response = JsonConvert.DeserializeObject<BaseResponse>(message);
 
-            switch (response.Type.ToLower())
+            if (string.IsNullOrWhiteSpace(response?.Type)) return;
+
+            switch (response.Type.ToLowerInvariant())
             {               
                 case "diskinfo":
                     var diskinfo = JsonConvert.DeserializeObject<ResponseDiskInfo>(message);                    

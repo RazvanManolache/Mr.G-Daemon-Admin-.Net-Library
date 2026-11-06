@@ -1,4 +1,4 @@
-﻿using MrG.Daemon.Control.Data;
+using MrG.Daemon.Control.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace MrG.Daemon.Control.Reponses
 {
     public class ResponseSubApplications : BaseResponse
     {
-        public List<SubApplication> Data { get; set; }
+        public List<SubApplication>? Data { get; set; }
     }
 }

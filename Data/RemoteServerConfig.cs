@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MrG.Daemon.Control.Enums;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MrG.Daemon.Control.Data
 {
-    public class RemoteServerConfig : ViewModelBase
+    public class RemoteServerConfig : ObservableObject
     {
         private ServerType _serverType = ServerType.Local;
         public ServerType ServerType
@@ -19,7 +19,7 @@ namespace MrG.Daemon.Control.Data
             }
             set
             {
-                this.Set(ref _serverType, value);
+                this.SetProperty(ref _serverType, value);
             }
         }
         private string ip = "";
@@ -31,7 +31,7 @@ namespace MrG.Daemon.Control.Data
             }
             set
             {
-                this.Set(ref ip, value);
+                this.SetProperty(ref ip, value);
             }
         }
 
@@ -44,7 +44,7 @@ namespace MrG.Daemon.Control.Data
             }
             set
             {
-                this.Set(ref token, value);
+                this.SetProperty(ref token, value);
             }
         }
 

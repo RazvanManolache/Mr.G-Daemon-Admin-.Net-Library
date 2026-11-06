@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MrG.Daemon.Control.Data
 {
 
-    public class SubApplication : ViewModelBase
+    public class SubApplication : ObservableObject
     {
         [JsonIgnore]
         public StringBuffer ConsoleBuffer { get; set; } = new StringBuffer();
@@ -24,7 +24,7 @@ namespace MrG.Daemon.Control.Data
         public bool ControlVisible
         {
             get { return controlVisible; }
-            set { Set(ref controlVisible, value); }
+            set { SetProperty(ref controlVisible, value); }
         }
 
         private bool settingsVisible;
@@ -32,7 +32,7 @@ namespace MrG.Daemon.Control.Data
         public bool SettingsVisible
         {
             get { return settingsVisible; }
-            set { Set(ref settingsVisible, value); }
+            set { SetProperty(ref settingsVisible, value); }
         }
 
         private bool runOptionsVisible;
@@ -40,28 +40,28 @@ namespace MrG.Daemon.Control.Data
         public bool RunOptionsVisible
         {
             get { return runOptionsVisible; }
-            set { Set(ref runOptionsVisible, value); }
+            set { SetProperty(ref runOptionsVisible, value); }
         }
         private bool commandVisible;
         [JsonIgnore]
         public bool CommandVisible
         {
             get { return commandVisible; }
-            set { Set(ref commandVisible, value); }
+            set { SetProperty(ref commandVisible, value); }
         }
         private bool sourceVisible;
         [JsonIgnore]
         public bool SourceVisible
         {
             get { return sourceVisible; }
-            set { Set(ref sourceVisible, value); }
+            set { SetProperty(ref sourceVisible, value); }
         }
         private bool consoleVisible;
         [JsonIgnore]
         public bool ConsoleVisible
         {
             get { return consoleVisible; }
-            set { Set(ref consoleVisible, value); }
+            set { SetProperty(ref consoleVisible, value); }
         }
 
         [JsonIgnore]
@@ -116,14 +116,14 @@ namespace MrG.Daemon.Control.Data
         public string Id
         {
             get { return id; }
-            set { Set(ref id, value); }
+            set { SetProperty(ref id, value); }
         }
 
         private string name = "";
         public string Name
         {
             get { return name; }
-            set { Set(ref name, value); }
+            set { SetProperty(ref name, value); }
         }
 
         private bool hasUpdates = false;
@@ -131,37 +131,37 @@ namespace MrG.Daemon.Control.Data
         public bool HasUpdates
         {
             get { return hasUpdates; }
-            set { Set(ref hasUpdates, value); 
-                this.RaisePropertyChanged(nameof(NotificationText));
-                this.RaisePropertyChanged(nameof(NotificationVisible));
+            set { SetProperty(ref hasUpdates, value); 
+                this.OnPropertyChanged(nameof(NotificationText));
+                this.OnPropertyChanged(nameof(NotificationVisible));
             }
         }
         private string commandExec = "";
         public string CommandExec
         {
             get { return commandExec; }
-            set { Set(ref commandExec, value); }
+            set { SetProperty(ref commandExec, value); }
         }
 
         private string command = "";
         public string Command
         {
             get { return command; }
-            set { Set(ref command, value); }
+            set { SetProperty(ref command, value); }
         }
 
         private bool restartOnCriticalError;
         public bool RestartOnCriticalError
         {
             get { return restartOnCriticalError; }
-            set { Set(ref restartOnCriticalError, value); }
+            set { SetProperty(ref restartOnCriticalError, value); }
         }
 
         private ObservableCollection<string> criticalErrorMessages = new ObservableCollection<string>();
         public ObservableCollection<string> CriticalErrorMessages
         {
             get { return criticalErrorMessages; }
-            set { Set(ref criticalErrorMessages, value); }
+            set { SetProperty(ref criticalErrorMessages, value); }
         }
 
         public string CriticalErrorMessagesString
@@ -184,42 +184,42 @@ namespace MrG.Daemon.Control.Data
         public bool AutoStart
         {
             get { return autoStart; }
-            set { Set(ref autoStart, value); }
+            set { SetProperty(ref autoStart, value); }
         }
 
         private string repoURL = "";
         public string RepoURL
         {
             get { return repoURL; }
-            set { Set(ref repoURL, value); }
+            set { SetProperty(ref repoURL, value); }
         }
 
         private string branch = "main";
         public string Branch
         {
             get { return branch; }
-            set { Set(ref branch, value); }
+            set { SetProperty(ref branch, value); }
         }
 
         private string path = "";
         public string Path
         {
             get { return path; }
-            set { Set(ref path, value); }
+            set { SetProperty(ref path, value); }
         }
 
         private bool autoUpdate;
         public bool AutoUpdate
         {
             get { return autoUpdate; }
-            set { Set(ref autoUpdate, value); }
+            set { SetProperty(ref autoUpdate, value); }
         }
 
         private ObservableCollection<string> flags = new ObservableCollection<string>();
         public ObservableCollection<string> Flags
         {
             get { return flags; }
-            set { Set(ref flags, value); }
+            set { SetProperty(ref flags, value); }
         }
 
         public string FlagsString
@@ -242,16 +242,16 @@ namespace MrG.Daemon.Control.Data
         public string AppType
         {
             get { return appType; }
-            set { Set(ref appType, value); }
+            set { SetProperty(ref appType, value); }
         }
 
         private string status = "";
         public string Status
         {
             get { return status; }
-            set { Set(ref status, value); 
-                this.RaisePropertyChanged(nameof(NotificationText));
-                this.RaisePropertyChanged(nameof(NotificationVisible));
+            set { SetProperty(ref status, value); 
+                this.OnPropertyChanged(nameof(NotificationText));
+                this.OnPropertyChanged(nameof(NotificationVisible));
             }
         }
 
@@ -261,7 +261,7 @@ namespace MrG.Daemon.Control.Data
             get { return setupCommand; }
             set
             {
-                Set(ref setupCommand, value);
+                SetProperty(ref setupCommand, value);
             }
         }
 
@@ -269,7 +269,7 @@ namespace MrG.Daemon.Control.Data
         public bool FirstRun
         {
             get { return firstRun; }
-            set { Set(ref firstRun, value); }
+            set { SetProperty(ref firstRun, value); }
         }
 
      
@@ -279,10 +279,10 @@ namespace MrG.Daemon.Control.Data
         {
             get { return running; }
             set { 
-                Set(ref running, value); 
-                this.RaisePropertyChanged(nameof(StartEnabled));
-                this.RaisePropertyChanged(nameof(StopEnabled));
-                this.RaisePropertyChanged(nameof(RestartEnabled));
+                SetProperty(ref running, value); 
+                this.OnPropertyChanged(nameof(StartEnabled));
+                this.OnPropertyChanged(nameof(StopEnabled));
+                this.OnPropertyChanged(nameof(RestartEnabled));
 
             }
         }
@@ -304,14 +304,14 @@ namespace MrG.Daemon.Control.Data
             Status = subApplication.Status;
             FirstRun = subApplication.FirstRun;
             Running = subApplication.Running;
-            this.RaisePropertyChanged(nameof(CriticalErrorMessagesString));
-            this.RaisePropertyChanged(nameof(FlagsString));
+            this.OnPropertyChanged(nameof(CriticalErrorMessagesString));
+            this.OnPropertyChanged(nameof(FlagsString));
           
             return this;
         }
 
         private bool logVisible;
 
-        public bool LogVisible { get => logVisible; set => Set(ref logVisible, value); }
+        public bool LogVisible { get => logVisible; set => SetProperty(ref logVisible, value); }
     }
 }

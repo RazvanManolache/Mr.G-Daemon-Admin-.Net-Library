@@ -1,4 +1,4 @@
-﻿using MrG.Daemon.Control.Data;
+using MrG.Daemon.Control.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace MrG.Daemon.Control.Reponses
 {
     public class ResponseFlags : BaseResponse
     {
-        public ApplicationFlagsData Data { get; set; }
+        public ApplicationFlagsData? Data { get; set; }
     }
 }

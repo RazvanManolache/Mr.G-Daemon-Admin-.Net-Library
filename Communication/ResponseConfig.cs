@@ -1,4 +1,4 @@
-﻿using MrG.Daemon.Control.Data;
+using MrG.Daemon.Control.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,6 @@ namespace MrG.Daemon.Control.Reponses
     public class ResponseConfig:BaseResponse
     {
         [JsonProperty("data")]
-        public ConfigData Data { get; set; }
+        public ConfigData? Data { get; set; }
     }
 }

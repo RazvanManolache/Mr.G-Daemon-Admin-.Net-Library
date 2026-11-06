@@ -1,16 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
 namespace MrG.Daemon.Control.Managers
 {
+    [SupportedOSPlatform("windows")]
     public static class DaemonServiceManager
     {
-        public static event EventHandler<ServiceControllerStatus?> ServiceStatusChanged;
+        public static event EventHandler<ServiceControllerStatus?>? ServiceStatusChanged;
 
         public static string ServiceName = "MrG.Daemon";
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,6 @@ namespace MrG.Daemon.Control.Data
 {
     public class ApplicationFlagGroups
     {
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
     }
 }

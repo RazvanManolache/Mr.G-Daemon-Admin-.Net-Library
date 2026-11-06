@@ -1,4 +1,4 @@
-﻿using MrG.Daemon.Control.Data;
+using MrG.Daemon.Control.Data;
 using MrG.Daemon.Control.Reponses;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace MrG.Daemon.Control.Communication
 {
     public class ResponseLogEvent : BaseResponse
     {
-        public LogEvent Data { get; set; }
+        public LogEvent? Data { get; set; }
 
     }
 }

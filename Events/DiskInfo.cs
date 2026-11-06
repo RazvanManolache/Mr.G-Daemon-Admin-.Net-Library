@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MrG.Daemon.Control.Enums;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MrG.Daemon.Control.Events
 {
-    public class DiskInfo : ViewModelBase
+    public class DiskInfo : ObservableObject
     {
         [JsonProperty("name")]
         public string Path { get; set; } = "";
@@ -21,9 +21,9 @@ namespace MrG.Daemon.Control.Events
             get { return _freeSpace; }
             set
             {
-                Set(ref _freeSpace, value);
-                RaisePropertyChanged(nameof(SpacePercentage));
-                RaisePropertyChanged(nameof(FreeSpaceString));
+                SetProperty(ref _freeSpace, value);
+                OnPropertyChanged(nameof(SpacePercentage));
+                OnPropertyChanged(nameof(FreeSpaceString));
             }
         }
 
@@ -42,9 +42,9 @@ namespace MrG.Daemon.Control.Events
             get { return _totalSpace; }
             set
             {
-                Set(ref _totalSpace, value);
-                RaisePropertyChanged(nameof(SpacePercentage));
-                RaisePropertyChanged(nameof(TotalSpaceString));
+                SetProperty(ref _totalSpace, value);
+                OnPropertyChanged(nameof(SpacePercentage));
+                OnPropertyChanged(nameof(TotalSpaceString));
             }
         }
 

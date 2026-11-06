@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
@@ -9,14 +9,14 @@ namespace MrG.Daemon.Control.Managers
 {
     public class WebSocketClient
     {
-        private ClientWebSocket _webSocket;
+        private ClientWebSocket? _webSocket;
         private readonly Uri _uri;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly TimeSpan _reconnectDelay = TimeSpan.FromSeconds(5);
 
-        public event Action Connected;
-        public event Action Disconnected;
-        public event Action<string> MessageReceived;
+        public event Action? Connected;
+        public event Action? Disconnected;
+        public event Action<string>? MessageReceived;
 
         public WebSocketClient(string uri)
         {
@@ -69,14 +69,16 @@ namespace MrG.Daemon.Control.Managers
 
         private async Task ReceiveMessagesAsync()
         {
+            var socket = _webSocket;
+            if (socket is null) return;
             var buffer = new byte[1024 * 4];
             var message = "";
-            while (_webSocket.State == WebSocketState.Open)
+            while (socket.State == WebSocketState.Open)
             {
-                var result = await _webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                var result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
-                    await _webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
+                    await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
                     Disconnected?.Invoke();
                 }
                 else
@@ -95,10 +97,11 @@ namespace MrG.Daemon.Control.Managers
 
         public async void SendMessageAsync(string message)
         {
-            if (_webSocket.State == WebSocketState.Open)
+            var socket = _webSocket;
+            if (socket?.State == WebSocketState.Open)
             {
                 var buffer = Encoding.UTF8.GetBytes(message);
-                await _webSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                await socket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
     }
